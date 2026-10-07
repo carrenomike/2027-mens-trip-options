@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Men's Group 2027 Trip Options</title>
+<style>
+  :root {
+    --bg: #f6f4ef;
+    --card: #ffffff;
+    --text: #1f2328;
+    --muted: #5f6670;
+    --accent: #2f6f5e;
+    --accent-soft: #e3efe9;
+    --border: #e4e0d8;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 40px 0 24px; }
+  h1 { margin: 0 0 8px; font-size: 2rem; }
+  header p { margin: 0; color: var(--muted); }
+
+  nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  nav a {
+    padding: 6px 14px; border-radius: 999px;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--text); text-decoration: none; font-size: .9rem;
+  }
+  nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+  .trip {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; margin-bottom: 20px;
+    scroll-margin-top: 16px;
+  }
+  .photo {
+    width: 100%; aspect-ratio: 16 / 7; object-fit: cover; display: block;
+  }
+  /* Mockup only: stands in for a real photo */
+  .photo.placeholder {
+    display: grid; place-items: center; color: #fff; font-weight: 600;
+    letter-spacing: .05em; text-transform: uppercase; font-size: .85rem;
+  }
+  .trip summary { list-style: none; cursor: pointer; }
+  .trip summary::-webkit-details-marker { display: none; }
+  .trip-head { position: relative; padding: 16px 20px; }
+  .trip-body { padding: 0 20px 24px; border-top: 1px solid var(--border); }
+  .trip h2 { margin: 0 0 4px; font-size: 1.6rem; padding-right: 110px; }
+  .tagline { margin: 0; color: var(--muted); }
+  .toggle {
+    position: absolute; top: 20px; right: 20px;
+    font-size: .85rem; font-weight: 600; color: var(--accent);
+  }
+  .toggle::after { content: "Show details ▾"; }
+  .trip[open] .toggle::after { content: "Hide details ▴"; }
+  .trip summary:hover h2 { color: var(--accent); }
+
+  h3 {
+    margin: 24px 0 10px; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .08em; color: var(--accent);
+  }
+
+  .airport strong { font-size: 1.05rem; }
+  .airport span { color: var(--muted); }
+
+  .lodging { display: grid; gap: 10px; }
+  .lodge {
+    border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px;
+  }
+  .lodge a { color: var(--text); font-weight: 600; }
+  .lodge a:hover { color: var(--accent); }
+  .amenities { margin: 8px 0 0; font-size: .9rem; color: var(--muted); }
+  .disclaimer { margin: -4px 0 10px; font-size: .85rem; font-style: italic; color: var(--muted); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .tag {
+    font-size: .8rem; padding: 2px 10px; border-radius: 999px;
+    background: var(--bg); color: var(--muted);
+  }
+  .tag.price { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+
+  .location { margin: 16px 0 0; }
+  .location a, .airports a { color: var(--accent); font-weight: 600; }
+  ul.airports { margin: 0; padding-left: 20px; }
+  ul.airports li { margin-bottom: 4px; }
+  ul.airports span { color: var(--muted); }
+
+  ul.activities { margin: 0; padding-left: 20px; columns: 2; column-gap: 24px; }
+  ul.activities li { margin-bottom: 4px; }
+  .pick { font-size: .75rem; font-weight: 600; color: #b7791f; white-space: nowrap; }
+
+  .months {
+    display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px;
+    margin-bottom: 8px;
+  }
+  .months span {
+    text-align: center; font-size: .7rem; padding: 6px 0; border-radius: 4px;
+    background: var(--bg); color: var(--muted);
+  }
+  .months span.good { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .months span.best { background: var(--accent); color: #fff; font-weight: 600; }
+  .season-note { margin: 0; color: var(--muted); }
+
+  .top { display: inline-block; margin-top: 20px; font-size: .85rem; color: var(--muted); }
+
+  footer { padding: 8px 0 48px; text-align: center; }
+  .btn {
+    display: inline-block; padding: 12px 24px; border-radius: 999px;
+    background: var(--accent); color: #fff; text-decoration: none; font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header id="top">
+    <h1>Men's Group 2027 Trip Options</h1>
+    <p>Check out each trip below, then rank them in the form, from favorite to least favorite.</p>
+    <nav>
+      <a href="#wyoming">Wyoming</a>
+      <a href="#arizona">Arizona</a>
+      <a href="#alaska">Alaska</a>
+      <a href="#puerto-rico">Puerto Rico</a>
+      <a href="#costa-rica">Costa Rica</a>
+    </nav>
+  </header>
+
+  <!-- ===== TOGWOTEE PASS ===== -->
+  <details class="trip" id="wyoming">
+    <summary>
+    <img class="photo" src="images/togwotee.jpg" alt="Lake with a rocky peak near Togwotee Pass" style="object-position: center 35%">
+    <div class="trip-head">
+      <h2>Wyoming</h2>
+      <p class="tagline">Togwotee Pass · Between Grand Teton and Yellowstone</p>
+      <span class="toggle"></span>
+      </div>
+    </summary>
+    <div class="trip-body">
+
+      <p class="location"><a href="https://maps.app.goo.gl/zqVtjDu4HDD6W9868" target="_blank" rel="noopener">📍 View on map</a></p>
+
+      <h3>Closest airports</h3>
+      <ul class="airports">
+        <li><a href="https://maps.app.goo.gl/qzpa2u7msFG2sAhf6" target="_blank" rel="noopener">Jackson Hole Airport (JAC)</a> <span>· Jackson, WY · 55 min drive</span></li>
+        <li><a href="https://maps.app.goo.gl/nuED2sPa7uepSAVD7" target="_blank" rel="noopener">Central Wyoming Regional Airport (RIW)</a> <span>· Riverton, WY · 1 hr 40 min drive</span></li>
+        <li><a href="https://maps.app.goo.gl/W2tJF18MtHvjgHAcA" target="_blank" rel="noopener">Southwest Wyoming Regional Airport (RKS)</a> <span>· Rock Springs, WY · 3 hr 45 min drive</span></li>
+      </ul>
+
+      <h3>Lodging options</h3>
+      <p class="disclaimer">These are examples, not actual recommendations.</p>
+      <div class="lodging">
+        <div class="lodge">
+          <a href="https://www.airbnb.com/rooms/1344394215924031667?unique_share_id=4bffec8d-2374-46ba-bad4-b52b26290169&amp;viralityEntryPoint=1&amp;s=76&amp;source_impression_id=p3_1791409189_P3dcu12bl0clrXjR&amp;check_in=2027-09-16&amp;guests=1&amp;adults=1&amp;check_out=2027-09-19" target="_blank" rel="noopener">Airbnb · 5 beds</a>
+          <div class="tags"><span class="tag">Airbnb</span><span class="tag">Private beds</span><span class="tag price">~$190 / person / night</span></div>
+        </div>
+        <div class="lodge">
+          <a href="https://www.airbnb.com/rooms/50487865?unique_share_id=e8d6c3ef-a4f0-4513-b047-9f743e0771b6&amp;viralityEntryPoint=1&amp;s=76&amp;source_impression_id=p3_1791409534_P385Y4prJP6kBO-y&amp;check_in=2027-09-16&amp;guests=1&amp;adults=1&amp;check_out=2027-09-19" target="_blank" rel="noopener">Airbnb · 9 beds</a>
+          <div class="tags"><span class="tag">Airbnb</span><span class="tag">Mixed private &amp; shared</span><span class="tag price">~$115 / person / night</span></div>
+        </div>
+        <div class="lodge">
+          <a href="https://www.togwoteelodge.com/togwotee-mountain-lodge" target="_blank" rel="noopener">Togwotee Mountain Lodge</a>
+          <div class="tags"><span class="tag">Lodge</span><span class="tag">Mixed private &amp; shared</span><span class="tag price">~$130–350 / person / night</span></div>
+        </div>
+      </div>
+
+      <h3>Activities nearby</h3>
+      <ul class="activities">
+        <li>Hiking</li>
+        <li>Horseback riding</li>
+        <li>Fishing</li>
+        <li>Canoeing</li>
+        <li>Grand Teton National Park</li>
+        <li>Yellowstone National Park</li>
+        <li>Wildlife watching</li>
+        <li>Mountain biking</li>
+      </ul>
+
+      <h3>Ideal time of year</h3>
+      <div class="months">
+        <span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span class="good">J</span>
+        <span class="good">J</span><span class="good">A</span><span class="best">S</span><span class="good">O</span><span>N</span><span>D</span>
+      </div>
+      <p class="season-note">June through October. September is ideal.</p>
+
+      <a class="top" href="#top">↑ Back to all trips</a>
+    </div>
+  </details>
+
+  <!-- ===== QUEEN CREEK ===== -->
+  <details class="trip" id="arizona">
+    <summary>
+    <img class="photo" src="images/queen-creek.webp" alt="Saguaro cactus with the Phoenix skyline and mountains behind" style="object-position: center 38%">
+    <div class="trip-head">
+      <h2>Arizona</h2>
+      <p class="tagline">Queen Creek · Free stay with a pool, hot tub, and desert adventures</p>
+      <span class="toggle"></span>
+      </div>
+    </summary>
+    <div class="trip-body">
+
+      <p class="location"><a href="https://maps.app.goo.gl/PouKEeo9NDpZc4zn6" target="_blank" rel="noopener">📍 View on map</a></p>
+
+      <h3>Closest airports</h3>
+      <ul class="airports">
+        <li><a href="https://maps.app.goo.gl/rvwUCXGuvvjFMnpU8" target="_blank" rel="noopener">Mesa Gateway Airport (AZA)</a> <span>· Mesa, AZ · 15 min drive</span></li>
+        <li><a href="https://maps.app.goo.gl/CZvwipN8VSDKocND6" target="_blank" rel="noopener">Phoenix Sky Harbor International Airport (PHX)</a> <span>· Phoenix, AZ · 45 min drive</span></li>
+      </ul>
+
+      <h3>Lodging options</h3>
+      <div class="lodging">
+        <div class="lodge">
+          <strong>Mike F's house</strong>
+          <div class="tags"><span class="tag">House</span><span class="tag">5 bedrooms · 6 beds + 2–3 air mattresses</span><span class="tag price">Free</span></div>
+          <p class="amenities">Pool, hot tub, sauna, cold plunge, gazebo, built-in grill, fire pit</p>
+        </div>
+      </div>
+
+      <h3>Activities nearby</h3>
+      <ul class="activities">
+        <li>Hiking the Superstition Mountains</li>
+        <li>Dolly Steamboat on Canyon Lake</li>
+        <li>Desert shooting</li>
+        <li>UTV / off-road excursion</li>
+        <li>Salt River kayaking</li>
+      </ul>
+
+      <h3>Ideal time of year</h3>
+      <div class="months">
+        <span>J</span><span>F</span><span class="best">M</span><span class="best">A</span><span>M</span><span>J</span>
+        <span>J</span><span>A</span><span>S</span><span class="best">O</span><span class="best">N</span><span>D</span>
+      </div>
+      <p class="season-note">March–April or late October–November.</p>
+
+      <a class="top" href="#top">↑ Back to all trips</a>
+    </div>
+  </details>
+
+  <!-- ===== JUNEAU ===== -->
+  <details class="trip" id="alaska">
+    <summary>
+    <img class="photo" src="images/juneau.jpg" alt="Aerial view of Juneau, its harbor, and forested mountains">
+    <div class="trip-head">
+      <h2>Alaska</h2>
+      <p class="tagline">Juneau · Glaciers, whales, and world-class fishing</p>
+      <span class="toggle"></span>
+      </div>
+    </summary>
+    <div class="trip-body">
+
+      <p class="location"><a href="https://maps.app.goo.gl/a1xajGYEmxSYpQts5" target="_blank" rel="noopener">📍 View on map</a></p>
+
+      <h3>Closest airports</h3>
+      <ul class="airports">
+        <li><a href="https://maps.app.goo.gl/EhSpRT6kKe2U5NKm6" target="_blank" rel="noopener">Juneau International Airport (JNU)</a> <span>· Juneau, AK · 10–15 min drive</span></li>
+      </ul>
+
+      <h3>Lodging options</h3>
+      <p class="disclaimer">These are examples, not actual recommendations.</p>
+      <div class="lodging">
+        <div class="lodge">
+          <a href="https://www.airbnb.com/rooms/1491706400146344321?adults=9&amp;check_in=2027-09-02&amp;check_out=2027-09-05&amp;search_mode=regular_search&amp;photo_id=2302508219&amp;source_impression_id=p3_ea354cac-765b-4153-a54e-dc793bddd0dc_f46e4ed3-e332-4d8d-a904-ee76288f1ee9_0_1491706400146344321_6&amp;previous_page_section_name=1000&amp;federated_search_id=ea354cac-765b-4153-a54e-dc793bddd0dc" target="_blank" rel="noopener">Waterfront Airbnb · 9 beds</a>
+          <div class="tags"><span class="tag">Airbnb</span><span class="tag">Waterfront</span><span class="tag price">~$115–300 / person / night</span></div>
+        </div>
+        <div class="lodge">
+          <a href="https://silverbowinn.com/guest-rooms/" target="_blank" rel="noopener">Silverbow Inn</a>
+          <div class="tags"><span class="tag">Inn</span><span class="tag">Private rooms</span><span class="tag price">~$850–1,100 / person / night</span></div>
+        </div>
+        <div class="lodge">
+          <a href="https://www.bestwestern.com/en_US/book/hotels-in-juneau/best-western-grandma-s-feather-bed/propertyCode.02012.html" target="_blank" rel="noopener">Best Western Grandma's Feather Bed</a>
+          <div class="tags"><span class="tag">Hotel</span><span class="tag">Private rooms</span><span class="tag price">~$300–530 / person / night</span></div>
+        </div>
+      </div>
+
+      <h3>Activities nearby</h3>
+      <ul class="activities">
+        <li>Glaciers <span class="pick">★ Top pick</span></li>
+        <li>Fishing <span class="pick">★ Top pick</span></li>
+        <li>Kayaking</li>
+        <li>Trap shooting</li>
+        <li>Charter fishing</li>
+        <li>Whale watching</li>
+        <li>Tidewater glacier tour</li>
+      </ul>
+
+      <h3>Ideal time of year</h3>
+      <div class="months">
+        <span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span class="good">J</span>
+        <span class="good">J</span><span class="good">A</span><span class="best">S</span><span>O</span><span>N</span><span>D</span>
+      </div>
+      <p class="season-note">June through September. September is ideal.</p>
+
+      <a class="top" href="#top">↑ Back to all trips</a>
+    </div>
+  </details>
+
+  <!-- ===== PUERTO RICO ===== -->
+  <details class="trip" id="puerto-rico">
+    <summary>
+    <img class="photo" src="images/utuado.jpg" alt="Green forested mountain peak near Utuado, Puerto Rico">
+    <div class="trip-head">
+      <h2>Puerto Rico</h2>
+      <p class="tagline">Utuado &amp; Rincón · Mountains, river pools, and surf</p>
+      <span class="toggle"></span>
+      </div>
+    </summary>
+    <div class="trip-body">
+
+      <p class="location">
+        <a href="https://maps.app.goo.gl/MQt2ghB7887egkyN9" target="_blank" rel="noopener">📍 Utuado on map</a> &nbsp;
+        <a href="https://maps.app.goo.gl/M29zzN4gwATES8ps8" target="_blank" rel="noopener">📍 Rincón on map</a>
+      </p>
+
+      <h3>Closest airports</h3>
+      <ul class="airports">
+        <li><a href="https://maps.app.goo.gl/oFs4VoQdmrrMf4Z59" target="_blank" rel="noopener">Rafael Hernández Airport (BQN)</a> <span>· Aguadilla, PR · 45 min drive to Rincón</span></li>
+        <li><a href="https://maps.app.goo.gl/VeKMKfRBNCLJXT366" target="_blank" rel="noopener">Luis Muñoz Marín International Airport (SJU)</a> <span>· San Juan, PR · 1 hr 20 min drive to Utuado</span></li>
+      </ul>
+
+      <h3>Lodging options</h3>
+      <p class="disclaimer">These are examples, not actual recommendations.</p>
+      <div class="lodging">
+        <div class="lodge">
+          <a href="https://www.booking.com/hotel/pr/hacienda-m-b-perfect-for-groups-with-pool-and-spacious-patio.html?aid=356980&amp;label=gog235jc-10CAsouQFCPGhhY2llbmRhLW0tYi1wZXJmZWN0LWZvci1ncm91cHMtd2l0aC1wb29sLWFuZC1zcGFjaW91cy1wYXRpb0gzWANoiQKIAQGYATO4ARfIAQzYAQPoAQH4AQGIAgGoAgG4As2om9YGwAIB0gIkZTEzZDBiYzMtZGI0OS00YWZlLWI2NDMtNWM1MDYwMDRmZTE32AIB4AIB&amp;sid=9d5dad4a1d9f1af84b7368988a4439cd&amp;all_sr_blocks=1431770002_414730925_9_0_0&amp;checkin=2027-04-15&amp;checkout=2027-04-18&amp;dest_id=20154450&amp;dest_type=city&amp;dist=0&amp;group_adults=9&amp;group_children=0&amp;hapos=1&amp;highlighted_blocks=1431770002_414730925_9_0_0&amp;hpos=1&amp;matching_block_id=1431770002_414730925_9_0_0&amp;no_rooms=1&amp;req_adults=9&amp;req_children=0&amp;room1=A%2CA%2CA%2CA%2CA%2CA%2CA%2CA%2CA&amp;sb_price_type=total&amp;sr_order=popularity&amp;sr_pri_blocks=1431770002_414730925_9_0_0__255937&amp;srepoch=1791415483&amp;srpvid=7c49e9899d9dcac89340b8e986cdf34f&amp;type=total&amp;ucfs=1&amp;" target="_blank" rel="noopener">Hacienda M&amp;B</a>
+          <div class="tags"><span class="tag">Vega Baja, PR</span><span class="tag price">~$75 / person / night</span></div>
+        </div>
+      </div>
+
+      <h3>Activities nearby</h3>
+      <p class="amenities" style="margin:0 0 10px">Suggested split: 2 nights in the mountains (Utuado / Jayuya) and 2 nights on the coast (Rincón).</p>
+      <ul class="activities">
+        <li>Hiking</li>
+        <li>Natural river pool</li>
+        <li>Pool / patio</li>
+        <li>Bioluminescent bay (Fajardo) <span class="pick" style="color:var(--muted)">Full-day trip</span></li>
+        <li>Guavate lechoneras (roast pork highway with live music)</li>
+        <li>Coffee hacienda tour</li>
+        <li>Surfing</li>
+      </ul>
+
+      <h3>Ideal time of year</h3>
+      <div class="months">
+        <span>J</span><span>F</span><span>M</span><span class="best">A</span><span class="best">M</span><span>J</span>
+        <span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span>
+      </div>
+      <p class="season-note">April to May.</p>
+
+      <a class="top" href="#top">↑ Back to all trips</a>
+    </div>
+  </details>
+
+  <!-- ===== NOSARA ===== -->
+  <details class="trip" id="costa-rica">
+    <summary>
+    <img class="photo" src="images/nosara.jpg" alt="Sunset over a palm-lined beach and jungle in Nosara, Costa Rica">
+    <div class="trip-head">
+      <h2>Costa Rica</h2>
+      <p class="tagline">Nosara · Surf, jungle, and wellness on the Pacific coast</p>
+      <span class="toggle"></span>
+      </div>
+    </summary>
+    <div class="trip-body">
+
+      <p class="location"><a href="https://maps.app.goo.gl/mqztbodSFepJH5WeA" target="_blank" rel="noopener">📍 View on map</a></p>
+
+      <h3>Closest airports</h3>
+      <ul class="airports">
+        <li><a href="https://maps.app.goo.gl/7YyGkvXS48eismxq9" target="_blank" rel="noopener">Daniel Oduber Quirós International Airport (LIR)</a> <span>· Liberia, Costa Rica · 2.5–3 hr drive</span></li>
+      </ul>
+
+      <h3>Lodging options</h3>
+      <p class="disclaimer">These are examples, not actual recommendations.</p>
+      <div class="lodging">
+        <div class="lodge">
+          <a href="https://www.airbnb.com/rooms/1447391157640406620?adults=9&amp;check_in=2027-05-20&amp;check_out=2027-05-23&amp;search_mode=regular_search&amp;photo_id=2221919931&amp;source_impression_id=p3_1856f307-988c-4704-81b5-92ad7bdb2876_60452e92-7f23-44b6-bfaa-2feda25379a3_0_1447391157640406620_0&amp;previous_page_section_name=1000&amp;federated_search_id=1856f307-988c-4704-81b5-92ad7bdb2876" target="_blank" rel="noopener">Airbnb · 5 bedrooms</a>
+          <div class="tags"><span class="tag">Airbnb</span><span class="tag">5 bedrooms · 16 beds</span><span class="tag price">~$120 / person / night</span></div>
+        </div>
+        <div class="lodge">
+          <a href="https://www.airbnb.com/rooms/1311633974453894915?adults=9&amp;check_in=2027-05-20&amp;check_out=2027-05-23&amp;search_mode=regular_search&amp;photo_id=2098432604&amp;source_impression_id=p3_1856f307-988c-4704-81b5-92ad7bdb2876_60452e92-7f23-44b6-bfaa-2feda25379a3_0_1311633974453894915_1&amp;previous_page_section_name=1000&amp;federated_search_id=1856f307-988c-4704-81b5-92ad7bdb2876" target="_blank" rel="noopener">Airbnb · 6 bedrooms</a>
+          <div class="tags"><span class="tag">Airbnb</span><span class="tag">6 bedrooms · 11 beds</span><span class="tag price">~$100 / person / night</span></div>
+        </div>
+      </div>
+
+      <h3>Activities nearby</h3>
+      <ul class="activities">
+        <li>Beaching</li>
+        <li>Surfing</li>
+        <li>Hiking</li>
+        <li>Excellent food</li>
+        <li>Rainforest</li>
+        <li>Yoga / breathwork</li>
+        <li>Medicine journey</li>
+        <li>Other Costa Rica tours</li>
+        <li>All manner of hippie shit</li>
+      </ul>
+
+      <h3>Ideal time of year</h3>
+      <div class="months">
+        <span class="good">J</span><span class="good">F</span><span class="good">M</span><span class="good">A</span><span class="best">M</span><span>J</span>
+        <span>J</span><span>A</span><span>S</span><span>O</span><span class="best">N</span><span class="good">D</span>
+      </div>
+      <p class="season-note">December through April. May and November are ideal.</p>
+
+      <a class="top" href="#top">↑ Back to all trips</a>
+    </div>
+  </details>
+
+  <footer>
+    <a class="btn" href="https://app.opinionx.co/233eff2b-9d9d-4c9e-ac00-79ffbfe167f0" target="_blank" rel="noopener">Rank the trips →</a>
+  </footer>
+
+</div>
+<script>
+  // Open a trip when someone arrives via its link (e.g. from the form) or taps its button at the top.
+  function openTrip(hash) {
+    const trip = hash && document.querySelector('details.trip' + hash);
+    if (trip) { trip.open = true; trip.scrollIntoView(); }
+  }
+  openTrip(location.hash);
+  document.querySelectorAll('nav a').forEach(a =>
+    a.addEventListener('click', () => openTrip(a.getAttribute('href'))));
+</script>
+</body>
+</html>
