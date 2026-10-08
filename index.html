@@ -27,40 +27,36 @@
   h1 { margin: 0 0 8px; font-size: 2rem; }
   header p { margin: 0; color: var(--muted); }
 
-  nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  /* Tab bar: pinned to the top, swipes sideways when the tabs don't fit (phones). */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+    margin: 0 -16px 16px; padding: 10px 16px;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+  }
+  nav::-webkit-scrollbar { display: none; }
   nav a {
-    padding: 6px 14px; border-radius: 999px;
+    flex: none; padding: 8px 16px; border-radius: 999px;
     background: var(--card); border: 1px solid var(--border);
-    color: var(--text); text-decoration: none; font-size: .9rem;
+    color: var(--text); text-decoration: none; font-size: .95rem; white-space: nowrap;
   }
   nav a:hover { border-color: var(--accent); color: var(--accent); }
+  nav a.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
 
   .trip {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 14px; overflow: hidden; margin-bottom: 20px;
-    scroll-margin-top: 16px;
   }
+  /* Only hides trips once the script is running, so the page still shows everything without it. */
+  .tabs .trip:not(.active) { display: none; }
+  .tabs footer.hidden { display: none; }
   .photo {
     width: 100%; aspect-ratio: 16 / 7; object-fit: cover; display: block;
   }
-  /* Mockup only: stands in for a real photo */
-  .photo.placeholder {
-    display: grid; place-items: center; color: #fff; font-weight: 600;
-    letter-spacing: .05em; text-transform: uppercase; font-size: .85rem;
-  }
-  .trip summary { list-style: none; cursor: pointer; }
-  .trip summary::-webkit-details-marker { display: none; }
-  .trip-head { position: relative; padding: 16px 20px; }
+  .trip-head { padding: 16px 20px; }
   .trip-body { padding: 0 20px 24px; border-top: 1px solid var(--border); }
-  .trip h2 { margin: 0 0 4px; font-size: 1.6rem; padding-right: 110px; }
+  .trip h2 { margin: 0 0 4px; font-size: 1.6rem; }
   .tagline { margin: 0; color: var(--muted); }
-  .toggle {
-    position: absolute; top: 20px; right: 20px;
-    font-size: .85rem; font-weight: 600; color: var(--accent);
-  }
-  .toggle::after { content: "Show details ▾"; }
-  .trip[open] .toggle::after { content: "Hide details ▴"; }
-  .trip summary:hover h2 { color: var(--accent); }
 
   h3 {
     margin: 24px 0 10px; font-size: .8rem; text-transform: uppercase;
@@ -107,7 +103,13 @@
   .months span.best { background: var(--accent); color: #fff; font-weight: 600; }
   .season-note { margin: 0; color: var(--muted); }
 
-  .top { display: inline-block; margin-top: 20px; font-size: .85rem; color: var(--muted); }
+  .pager { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 28px; }
+  .pager:empty { display: none; }
+  .pager .prev { color: var(--muted); font-weight: 600; text-decoration: none; padding: 12px 0; }
+  .pager .next {
+    margin-left: auto; padding: 12px 20px; border-radius: 999px;
+    border: 1px solid var(--accent); color: var(--accent); font-weight: 600; text-decoration: none;
+  }
 
   footer { padding: 8px 0 48px; text-align: center; }
   .btn {
@@ -122,25 +124,23 @@
   <header id="top">
     <h1>Men's Group 2027 Trip Options</h1>
     <p>Check out each trip below, then rank them in the form, from favorite to least favorite.</p>
-    <nav>
-      <a href="#wyoming">Wyoming</a>
-      <a href="#arizona">Arizona</a>
-      <a href="#alaska">Alaska</a>
-      <a href="#puerto-rico">Puerto Rico</a>
-      <a href="#costa-rica">Costa Rica</a>
-    </nav>
   </header>
 
+  <nav>
+    <a href="#wyoming">Wyoming</a>
+    <a href="#arizona">Arizona</a>
+    <a href="#alaska">Alaska</a>
+    <a href="#puerto-rico">Puerto Rico</a>
+    <a href="#costa-rica">Costa Rica</a>
+  </nav>
+
   <!-- ===== TOGWOTEE PASS ===== -->
-  <details class="trip" id="wyoming">
-    <summary>
+  <section class="trip" id="wyoming">
     <img class="photo" src="images/togwotee.jpg" alt="Lake with a rocky peak near Togwotee Pass" style="object-position: center 35%">
     <div class="trip-head">
       <h2>Wyoming</h2>
       <p class="tagline">Togwotee Pass · Between Grand Teton and Yellowstone</p>
-      <span class="toggle"></span>
       </div>
-    </summary>
     <div class="trip-body">
 
       <p class="location"><a href="https://maps.app.goo.gl/zqVtjDu4HDD6W9868" target="_blank" rel="noopener">📍 View on map</a></p>
@@ -188,20 +188,17 @@
       </div>
       <p class="season-note">June through October. September is ideal.</p>
 
-      <a class="top" href="#top">↑ Back to all trips</a>
+      <div class="pager"></div>
     </div>
-  </details>
+  </section>
 
   <!-- ===== QUEEN CREEK ===== -->
-  <details class="trip" id="arizona">
-    <summary>
+  <section class="trip" id="arizona">
     <img class="photo" src="images/queen-creek.webp" alt="Saguaro cactus with the Phoenix skyline and mountains behind" style="object-position: center 38%">
     <div class="trip-head">
       <h2>Arizona</h2>
       <p class="tagline">Queen Creek · Free stay with a pool, hot tub, and desert adventures</p>
-      <span class="toggle"></span>
       </div>
-    </summary>
     <div class="trip-body">
 
       <p class="location"><a href="https://maps.app.goo.gl/PouKEeo9NDpZc4zn6" target="_blank" rel="noopener">📍 View on map</a></p>
@@ -237,20 +234,17 @@
       </div>
       <p class="season-note">March–April or late October–November.</p>
 
-      <a class="top" href="#top">↑ Back to all trips</a>
+      <div class="pager"></div>
     </div>
-  </details>
+  </section>
 
   <!-- ===== JUNEAU ===== -->
-  <details class="trip" id="alaska">
-    <summary>
+  <section class="trip" id="alaska">
     <img class="photo" src="images/juneau.jpg" alt="Aerial view of Juneau, its harbor, and forested mountains">
     <div class="trip-head">
       <h2>Alaska</h2>
       <p class="tagline">Juneau · Glaciers, whales, and world-class fishing</p>
-      <span class="toggle"></span>
       </div>
-    </summary>
     <div class="trip-body">
 
       <p class="location"><a href="https://maps.app.goo.gl/a1xajGYEmxSYpQts5" target="_blank" rel="noopener">📍 View on map</a></p>
@@ -295,20 +289,17 @@
       </div>
       <p class="season-note">June through September. September is ideal.</p>
 
-      <a class="top" href="#top">↑ Back to all trips</a>
+      <div class="pager"></div>
     </div>
-  </details>
+  </section>
 
   <!-- ===== PUERTO RICO ===== -->
-  <details class="trip" id="puerto-rico">
-    <summary>
+  <section class="trip" id="puerto-rico">
     <img class="photo" src="images/utuado.jpg" alt="Green forested mountain peak near Utuado, Puerto Rico">
     <div class="trip-head">
       <h2>Puerto Rico</h2>
       <p class="tagline">Utuado &amp; Rincón · Mountains, river pools, and surf</p>
-      <span class="toggle"></span>
       </div>
-    </summary>
     <div class="trip-body">
 
       <p class="location">
@@ -350,20 +341,17 @@
       </div>
       <p class="season-note">April to May.</p>
 
-      <a class="top" href="#top">↑ Back to all trips</a>
+      <div class="pager"></div>
     </div>
-  </details>
+  </section>
 
   <!-- ===== NOSARA ===== -->
-  <details class="trip" id="costa-rica">
-    <summary>
+  <section class="trip" id="costa-rica">
     <img class="photo" src="images/nosara.jpg" alt="Sunset over a palm-lined beach and jungle in Nosara, Costa Rica">
     <div class="trip-head">
       <h2>Costa Rica</h2>
       <p class="tagline">Nosara · Surf, jungle, and wellness on the Pacific coast</p>
-      <span class="toggle"></span>
       </div>
-    </summary>
     <div class="trip-body">
 
       <p class="location"><a href="https://maps.app.goo.gl/mqztbodSFepJH5WeA" target="_blank" rel="noopener">📍 View on map</a></p>
@@ -406,9 +394,9 @@
       </div>
       <p class="season-note">December through April. May and November are ideal.</p>
 
-      <a class="top" href="#top">↑ Back to all trips</a>
+      <div class="pager"></div>
     </div>
-  </details>
+  </section>
 
   <footer>
     <a class="btn" href="https://app.opinionx.co/233eff2b-9d9d-4c9e-ac00-79ffbfe167f0" target="_blank" rel="noopener">Rank the trips →</a>
@@ -416,14 +404,49 @@
 
 </div>
 <script>
-  // Open a trip when someone arrives via its link (e.g. from the form) or taps its button at the top.
-  function openTrip(hash) {
-    const trip = hash && document.querySelector('details.trip' + hash);
-    if (trip) { trip.open = true; trip.scrollIntoView(); }
+  // Tabs: one trip shows at a time. A link ending in #trip-id (e.g. from the form) opens that trip.
+  const nav = document.querySelector('nav');
+  const trips = [...document.querySelectorAll('.trip')];
+  const footer = document.querySelector('footer');
+  const rankBtn = footer.querySelector('.btn');
+  const tabFor = id => nav.querySelector(`a[href="#${id}"]`);
+
+  // Fill each trip's Previous / Next buttons. The last trip gets the Rank button instead of Next.
+  trips.forEach((trip, i) => {
+    const prev = trips[i - 1], next = trips[i + 1];
+    const pager = trip.querySelector('.pager');
+    if (prev) pager.insertAdjacentHTML('beforeend',
+      `<a class="prev" href="#${prev.id}">← ${tabFor(prev.id).textContent}</a>`);
+    if (next) pager.insertAdjacentHTML('beforeend',
+      `<a class="next" href="#${next.id}">Next: ${tabFor(next.id).textContent} →</a>`);
+    else pager.append(rankBtn.cloneNode(true));
+  });
+
+  function showTrip(id, scroll) {
+    const trip = trips.find(t => t.id === id) || trips[0];
+    trips.forEach(t => t.classList.toggle('active', t === trip));
+    nav.querySelectorAll('a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + trip.id));
+    footer.classList.toggle('hidden', trip === trips[trips.length - 1]);
+
+    // Slide the selected tab to the middle of the bar so the tabs on either side stay visible.
+    const tab = tabFor(trip.id);
+    nav.scrollTo({ left: tab.offsetLeft - (nav.clientWidth - tab.offsetWidth) / 2, behavior: 'smooth' });
+
+    // Start the new trip at its photo, just under the tab bar (only if we've scrolled past that point).
+    const top = trip.getBoundingClientRect().top + scrollY - nav.offsetHeight - 8;
+    if (scroll && scrollY > top) window.scrollTo({ top, behavior: 'instant' });
   }
-  openTrip(location.hash);
-  document.querySelectorAll('nav a').forEach(a =>
-    a.addEventListener('click', () => openTrip(a.getAttribute('href'))));
+
+  document.body.classList.add('tabs');
+  showTrip(location.hash.slice(1), false);
+
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || !trips.some(t => '#' + t.id === a.getAttribute('href'))) return;
+    e.preventDefault();
+    history.replaceState(null, '', a.getAttribute('href'));
+    showTrip(a.getAttribute('href').slice(1), true);
+  });
 </script>
 </body>
 </html>
