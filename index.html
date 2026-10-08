@@ -95,12 +95,22 @@
     display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px;
     margin-bottom: 8px;
   }
+  /* Off months fade out; good = mid green; ideal = dark green with a star. */
   .months span {
-    text-align: center; font-size: .7rem; padding: 6px 0; border-radius: 4px;
-    background: var(--bg); color: var(--muted);
+    text-align: center; font-size: .7rem; line-height: 1.2; padding: 4px 0; border-radius: 4px;
+    border: 1px solid var(--border); color: #b8b4ac;
   }
-  .months span.good { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
-  .months span.best { background: var(--accent); color: #fff; font-weight: 600; }
+  .months span::before { content: "\00a0"; display: block; font-size: .6rem; }
+  .months span.good { background: #a8d5bf; border-color: #a8d5bf; color: #1d4a3e; font-weight: 600; }
+  .months span.best { background: #1d4a3e; border-color: #1d4a3e; color: #fff; font-weight: 700; }
+  .months span.best::before { content: "★"; color: #f2c14e; }
+  .legend { display: flex; gap: 14px; margin: 0 0 8px; font-size: .8rem; color: var(--muted); }
+  .legend span::before {
+    content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px;
+    margin-right: 5px; vertical-align: -1px;
+  }
+  .legend .best::before { background: #1d4a3e; }
+  .legend .good::before { background: #a8d5bf; }
   .season-note { margin: 0; color: var(--muted); }
 
   .pager { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 28px; }
@@ -186,6 +196,7 @@
         <span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span class="good">J</span>
         <span class="good">J</span><span class="good">A</span><span class="best">S</span><span class="good">O</span><span>N</span><span>D</span>
       </div>
+      <p class="legend"><span class="best">★ Ideal</span><span class="good">Good</span></p>
       <p class="season-note">June through October. September is ideal.</p>
 
       <div class="pager"></div>
@@ -232,6 +243,7 @@
         <span>J</span><span>F</span><span class="best">M</span><span class="best">A</span><span>M</span><span>J</span>
         <span>J</span><span>A</span><span>S</span><span class="best">O</span><span class="best">N</span><span>D</span>
       </div>
+      <p class="legend"><span class="best">★ Ideal</span></p>
       <p class="season-note">March–April or late October–November.</p>
 
       <div class="pager"></div>
@@ -287,6 +299,7 @@
         <span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span class="good">J</span>
         <span class="good">J</span><span class="good">A</span><span class="best">S</span><span>O</span><span>N</span><span>D</span>
       </div>
+      <p class="legend"><span class="best">★ Ideal</span><span class="good">Good</span></p>
       <p class="season-note">June through September. September is ideal.</p>
 
       <div class="pager"></div>
@@ -339,6 +352,7 @@
         <span>J</span><span>F</span><span>M</span><span class="best">A</span><span class="best">M</span><span>J</span>
         <span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span>
       </div>
+      <p class="legend"><span class="best">★ Ideal</span></p>
       <p class="season-note">April to May.</p>
 
       <div class="pager"></div>
@@ -392,6 +406,7 @@
         <span class="good">J</span><span class="good">F</span><span class="good">M</span><span class="good">A</span><span class="best">M</span><span>J</span>
         <span>J</span><span>A</span><span>S</span><span>O</span><span class="best">N</span><span class="good">D</span>
       </div>
+      <p class="legend"><span class="best">★ Ideal</span><span class="good">Good</span></p>
       <p class="season-note">December through April. May and November are ideal.</p>
 
       <div class="pager"></div>
